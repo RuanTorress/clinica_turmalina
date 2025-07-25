@@ -2,17 +2,55 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FooterWidget extends StatelessWidget {
+class FooterWidget extends StatefulWidget {
   FooterWidget({super.key});
 
+  @override
+  State<FooterWidget> createState() => _FooterWidgetState();
+}
+
+class _FooterWidgetState extends State<FooterWidget> {
   final List<String> doctorImages = [
     'assets/images/20241203_165154822_iOS.jpg',
     'assets/images/20241203_165557641_iOS.jpg',
     'assets/images/20241203_165058768_iOS.jpg',
-    // Adicione mais imagens conforme necessário
   ];
 
-  final PageController _pageController = PageController();
+  late PageController _pageController;
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+
+    // Auto-play timer para desktop
+    Future.delayed(Duration.zero, () {
+      if (mounted) {
+        _startAutoPlay();
+      }
+    });
+  }
+
+  void _startAutoPlay() {
+    Future.delayed(const Duration(seconds: 4), () {
+      if (mounted && _pageController.hasClients) {
+        int nextPage = (_currentPage + 1) % doctorImages.length;
+        _pageController.animateToPage(
+          nextPage,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+        _startAutoPlay();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +84,8 @@ class FooterWidget extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               GestureDetector(
-                onTap: () => _launchUrl(
-                    'https://ruantorress.github.io/bio-Ruan/'), // coloque o link desejado aqui
+                onTap: () =>
+                    _launchUrl('https://ruantorress.github.io/bio-Ruan/'),
                 child: Text(
                   'Desenvolvido por Ruan Torres',
                   style: TextStyle(
@@ -102,7 +140,7 @@ class FooterWidget extends StatelessWidget {
         // Lado direito - Imagem
         Expanded(
           flex: 2,
-          child: _buildDoctorImage(),
+          child: _buildDesktopDoctorImage(),
         ),
       ],
     );
@@ -113,7 +151,7 @@ class FooterWidget extends StatelessWidget {
       children: [
         _buildDoctorInfo(),
         const SizedBox(height: 40),
-        _buildDoctorImage(),
+        _buildMobileDoctorImage(),
       ],
     );
   }
@@ -162,71 +200,11 @@ class FooterWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Container(
-                    width: 4,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF7C6A58),
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  const Text(
-                    'Graduada em Biomédica',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
+              _buildQualificationItem('Graduada em Biomédica'),
               const SizedBox(height: 8),
-              Row(
-                children: [
-                  Container(
-                    width: 4,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF7C6A58),
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  const Text(
-                    'Pós graduada em estetica avançada',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
+              _buildQualificationItem('Pós graduada em estetica avançada'),
               const SizedBox(height: 8),
-              Row(
-                children: [
-                  Container(
-                    width: 4,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF7C6A58),
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  const Text(
-                    'Graduada em Esteticista',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
+              _buildQualificationItem('Graduada em Esteticista'),
             ],
           ),
         ),
@@ -249,66 +227,95 @@ class FooterWidget extends StatelessWidget {
         const SizedBox(height: 30),
 
         // Botão de contato
+        _buildContactButton(),
+      ],
+    );
+  }
+
+  Widget _buildQualificationItem(String text) {
+    return Row(
+      children: [
         Container(
+          width: 4,
+          height: 20,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFFF6EFE7), // Bege claro
-                Color.fromARGB(255, 136, 127, 116), // Marrom claro
-                // Marrom médio
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFF7C6A58).withOpacity(0.3),
-                blurRadius: 15,
-                offset: const Offset(0, 5),
-              ),
-            ],
+            color: const Color(0xFF7C6A58),
+            borderRadius: BorderRadius.circular(2),
           ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () => _launchUrl('https://wa.me/5511999999999'),
-              borderRadius: BorderRadius.circular(30),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                  vertical: 15,
-                ),
-                child: const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.chat,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      'Fale com a Dra. Thaynara',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+        ),
+        const SizedBox(width: 12),
+        Text(
+          text,
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: Colors.black87,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildDoctorImage() {
+  Widget _buildContactButton() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [
+            Color(0xFFF6EFE7),
+            Color.fromARGB(255, 136, 127, 116),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(30),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF7C6A58).withOpacity(0.3),
+            blurRadius: 15,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => _launchUrl('https://wa.me/5562984332822'),
+          borderRadius: BorderRadius.circular(30),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 30,
+              vertical: 15,
+            ),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.chat,
+                  color: Colors.white,
+                  size: 20,
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'Fale com a Dra. Thaynara',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Imagem para Desktop - POSICIONAMENTO DAS SETAS CORRIGIDO
+  Widget _buildDesktopDoctorImage() {
     return Container(
       height: 500,
+      width: 400, // Largura fixa para melhor controle
       child: Stack(
         children: [
           // Fundo decorativo
@@ -316,14 +323,13 @@ class FooterWidget extends StatelessWidget {
             top: 30,
             right: 30,
             child: Container(
-              width: 300,
+              width: 320,
               height: 400,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   colors: [
-                    Color(0xFFF6EFE7), // Bege claro
-                    Color.fromARGB(255, 136, 127, 116), // Marrom claro
-                    // Marrom médio
+                    Color(0xFFF6EFE7),
+                    Color.fromARGB(255, 136, 127, 116),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -333,18 +339,18 @@ class FooterWidget extends StatelessWidget {
             ),
           ),
 
-          // Carrossel de imagens
+          // Container principal das imagens - CENTRALIZADO
           Positioned(
             top: 0,
-            left: 0,
+            left: 40,
             child: Container(
-              width: 300,
+              width: 320,
               height: 400,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withOpacity(0.2),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -354,22 +360,27 @@ class FooterWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 child: PageView.builder(
                   controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentPage = index;
+                    });
+                  },
                   itemCount: doctorImages.length,
                   itemBuilder: (context, index) {
                     return Image.asset(
                       doctorImages[index],
                       fit: BoxFit.cover,
+                      width: 320,
+                      height: 400,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
-                          width: 300,
+                          width: 320,
                           height: 400,
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [
-                                Color(0xFFF6EFE7), // Bege claro
-                                Color.fromARGB(
-                                    255, 136, 127, 116), // Marrom claro
-                                // Marrom médio
+                                Color(0xFFF6EFE7),
+                                Color.fromARGB(255, 136, 127, 116),
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
@@ -392,50 +403,285 @@ class FooterWidget extends StatelessWidget {
             ),
           ),
 
-          // Indicadores do carrossel
+          // Seta ESQUERDA - POSICIONADA FORA DA IMAGEM
           Positioned(
-            bottom: 20,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: StatefulBuilder(
-                builder: (context, setState) {
-                  return FutureBuilder(
-                    future: Future.value(_pageController.hasClients
-                        ? _pageController.page?.round() ?? 0
-                        : 0),
-                    builder: (context, snapshot) {
-                      int currentPage = snapshot.data ?? 0;
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(doctorImages.length, (index) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 4),
-                            width: currentPage == index ? 16 : 8,
-                            height: 8,
-                            decoration: BoxDecoration(
-                              color: currentPage == index
-                                  ? const Color(0xFF7C6A58)
-                                  : Colors.white.withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          );
-                        }),
-                      );
-                    },
-                  );
-                },
+            left: 0, // Bem na borda esquerda
+            top: 180,
+            child: GestureDetector(
+              onTap: () {
+                int prevPage = _currentPage > 0
+                    ? _currentPage - 1
+                    : doctorImages.length - 1;
+                _pageController.animateToPage(
+                  prevPage,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF7C6A58),
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 2,
+                  ),
+                ),
+                child: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                  size: 20,
+                ),
               ),
             ),
           ),
 
-          // Elemento decorativo flutuante
+          // Seta DIREITA - POSICIONADA FORA DA IMAGEM
           Positioned(
-            bottom: 50,
+            right: 0, // Bem na borda direita
+            top: 180,
+            child: GestureDetector(
+              onTap: () {
+                int nextPage = (_currentPage + 1) % doctorImages.length;
+                _pageController.animateToPage(
+                  nextPage,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF7C6A58),
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 2,
+                  ),
+                ),
+                child: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+            ),
+          ),
+
+          // Indicadores - POSICIONADOS ABAIXO DA IMAGEM
+          Positioned(
+            bottom: 30,
+            left: 40,
+            right: 40,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(doctorImages.length, (index) {
+                  return GestureDetector(
+                    onTap: () {
+                      _pageController.animateToPage(
+                        index,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      margin: const EdgeInsets.symmetric(horizontal: 6),
+                      width: _currentPage == index ? 24 : 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        color: _currentPage == index
+                            ? const Color(0xFF7C6A58)
+                            : Colors.white.withOpacity(0.7),
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            blurRadius: 6,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                        border: Border.all(
+                          color: const Color(0xFF7C6A58).withOpacity(0.5),
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ),
+
+          // Elemento decorativo flutuante - REPOSICIONADO
+          Positioned(
+            bottom: 60,
+            right: 10,
+            child: Container(
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+                color: const Color(0xFF7C6A58),
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF7C6A58).withOpacity(0.4),
+                    blurRadius: 15,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+                border: Border.all(
+                  color: Colors.white,
+                  width: 3,
+                ),
+              ),
+              child: const Icon(
+                Icons.favorite,
+                color: Colors.white,
+                size: 35,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Imagem para Mobile - mantendo como estava
+  Widget _buildMobileDoctorImage() {
+    return Container(
+      height: 400,
+      child: Stack(
+        children: [
+          // Fundo decorativo
+          Positioned(
+            top: 20,
+            right: 20,
+            child: Container(
+              width: 280,
+              height: 350,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [
+                    Color(0xFFF6EFE7),
+                    Color.fromARGB(255, 136, 127, 116),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          ),
+
+          // Carrossel de imagens
+          Positioned(
+            top: 0,
+            left: 0,
+            child: Container(
+              width: 280,
+              height: 350,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: PageView.builder(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentPage = index;
+                    });
+                  },
+                  itemCount: doctorImages.length,
+                  itemBuilder: (context, index) {
+                    return Image.asset(
+                      doctorImages[index],
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [
+                                Color(0xFFF6EFE7),
+                                Color.fromARGB(255, 136, 127, 116),
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.person,
+                              size: 80,
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+
+          // Indicadores do carrossel para mobile
+          Positioned(
+            bottom: 20,
+            left: 0,
+            right: 20,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(doctorImages.length, (index) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    width: _currentPage == index ? 16 : 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: _currentPage == index
+                          ? const Color(0xFF7C6A58)
+                          : Colors.white.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ),
+
+          // Elemento decorativo flutuante para mobile
+          Positioned(
+            bottom: 40,
             right: 0,
             child: Container(
-              width: 80,
-              height: 80,
+              width: 60,
+              height: 60,
               decoration: BoxDecoration(
                 color: const Color(0xFF7C6A58),
                 shape: BoxShape.circle,
@@ -450,7 +696,7 @@ class FooterWidget extends StatelessWidget {
               child: const Icon(
                 Icons.favorite,
                 color: Colors.white,
-                size: 40,
+                size: 30,
               ),
             ),
           ),
@@ -529,7 +775,7 @@ class FooterWidget extends StatelessWidget {
             const SizedBox(width: 12),
             _buildSocialButton(
               FontAwesomeIcons.whatsapp,
-              () => _launchUrl('https://wa.me/5511999999999'),
+              () => _launchUrl('https://wa.me/5562984332822'),
             ),
           ],
         ),
@@ -551,7 +797,7 @@ class FooterWidget extends StatelessWidget {
       child: Container(
         width: 40,
         height: 40,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xFF7C6A58),
           shape: BoxShape.circle,
         ),
