@@ -15,8 +15,11 @@ class ClinicaEsteticaApp extends StatelessWidget {
       title: 'Turmalina Estética',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.pink,
-        primaryColor: const Color(0xFFE91E63),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFFB8A48B),
+          primary: const Color(0xFFB8A48B),
+          secondary: const Color(0xFF7C6A58),
+        ),
         textTheme: GoogleFonts.interTextTheme(),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),

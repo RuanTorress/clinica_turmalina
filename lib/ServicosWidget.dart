@@ -189,7 +189,7 @@ class _ServicosWidgetState extends State<ServicosWidget>
         labelColor: Colors.white,
         unselectedLabelColor: Colors.grey[600],
         indicator: BoxDecoration(
-          color: const Color(0xFFE91E63),
+          color: const Color(0xFF7C6A58),
           borderRadius: BorderRadius.circular(12),
         ),
         indicatorSize: TabBarIndicatorSize.tab,
@@ -293,7 +293,7 @@ class _ServicosWidgetState extends State<ServicosWidget>
             width: isDesktop ? 12 : 10,
             height: isDesktop ? 12 : 10,
             decoration: const BoxDecoration(
-              color: Color(0xFFE91E63),
+              color: Color(0xFF7C6A58),
               shape: BoxShape.circle,
             ),
           ),

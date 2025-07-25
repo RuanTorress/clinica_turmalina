@@ -70,7 +70,7 @@ class _ContatoWidgetState extends State<ContatoWidget> {
             child: Column(
               children: [
                 _buildHeader(isDesktop),
-                const SizedBox(height: 60),
+                const SizedBox(height: 10),
                 if (isDesktop) _buildDesktopLayout() else _buildMobileLayout(),
               ],
             ),
@@ -120,7 +120,7 @@ class _ContatoWidgetState extends State<ContatoWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(flex: 1, child: _buildContactInfo(true)),
-        const SizedBox(width: 40),
+        const SizedBox(width: 10),
         Expanded(flex: 1, child: _buildMapSection(true)),
       ],
     );
@@ -129,9 +129,9 @@ class _ContatoWidgetState extends State<ContatoWidget> {
   Widget _buildMobileLayout() {
     return Column(
       children: [
-        const SizedBox(height: 40),
+        const SizedBox(height: 10),
         _buildContactInfo(false),
-        const SizedBox(height: 40),
+        const SizedBox(height: 10),
         _buildMapSection(false),
       ],
     );
@@ -231,12 +231,12 @@ class _ContatoWidgetState extends State<ContatoWidget> {
               width: isDesktop ? 50 : 45,
               height: isDesktop ? 50 : 45,
               decoration: BoxDecoration(
-                color: const Color(0xFFE91E63).withOpacity(0.1),
+                color: const Color(0xFF7C6A58).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 icon,
-                color: const Color(0xFFE91E63),
+                color: const Color(0xFF7C6A58),
                 size: isDesktop ? 24 : 22,
               ),
             ),
@@ -315,11 +315,11 @@ class _ContatoWidgetState extends State<ContatoWidget> {
           horizontal: isDesktop ? 16 : 12,
         ),
         decoration: BoxDecoration(
-          color: const Color(0xFFE91E63),
+          color: const Color(0xFF7C6A58),
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFFE91E63).withOpacity(0.3),
+              color: const Color(0xFF7C6A58).withOpacity(0.3),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -549,7 +549,7 @@ class _ContatoWidgetState extends State<ContatoWidget> {
             _expandedStates[index]
                 ? Icons.keyboard_arrow_up
                 : Icons.keyboard_arrow_down,
-            color: const Color(0xFFE91E63),
+            color: const Color(0xFF7C6A58),
           ),
           onExpansionChanged: (expanded) {
             setState(() {
@@ -563,7 +563,7 @@ class _ContatoWidgetState extends State<ContatoWidget> {
               decoration: const BoxDecoration(
                 color: Colors.white,
                 border: Border(
-                  top: BorderSide(color: Color(0xFFE91E63), width: 2),
+                  top: BorderSide(color: Color(0xFF7C6A58), width: 2),
                 ),
               ),
               child: Column(
@@ -582,7 +582,7 @@ class _ContatoWidgetState extends State<ContatoWidget> {
                           vertical: 8,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE91E63),
+                          color: const Color(0xFF7C6A58),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
@@ -710,7 +710,7 @@ class _ContatoWidgetState extends State<ContatoWidget> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Mensagem enviada com sucesso!'),
-            backgroundColor: const Color(0xFFE91E63),
+            backgroundColor: const Color(0xFF7C6A58),
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),

@@ -35,7 +35,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
       pinned: true,
       backgroundColor:
           _isScrolled ? Colors.white.withOpacity(0.98) : Colors.transparent,
-      elevation: _isScrolled ? 6 : 0,
+      elevation: _isScrolled ? 8 : 0,
       flexibleSpace: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         decoration: BoxDecoration(
@@ -44,85 +44,39 @@ class _AppBarWidgetState extends State<AppBarWidget> {
           boxShadow: _isScrolled
               ? [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.08),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
+                    color: Colors.black.withOpacity(0.12),
+                    blurRadius: 15,
+                    offset: const Offset(0, 4),
+                    spreadRadius: 0,
                   )
                 ]
               : null,
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      // Logo
-                      Container(
-                        width: 44,
-                        height: 44,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: const Color(0xFFE91E63),
-                            width: 3,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.08),
-                              blurRadius: 8,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: ClipOval(
-                          child: Image.asset(
-                            'assets/images/logo.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 14),
-                      Text(
-                        'Turmalina Estética',
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
-                          color: _isScrolled
-                              ? const Color(0xFFE91E63)
-                              : Colors.white,
-                          letterSpacing: 1.2,
-                        ),
-                      ),
-                    ],
+            padding: EdgeInsets.symmetric(
+              horizontal: isDesktop ? 32.0 : 20.0,
+              vertical: isDesktop ? 8 : 12,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Logo e Título - Responsivo
+                Flexible(
+                  flex: isDesktop ? 1 : 2,
+                  child: _buildLogo(isDesktop),
+                ),
+
+                // Menu Desktop ou Mobile
+                if (isDesktop)
+                  Expanded(
+                    flex: 2,
+                    child: Center(child: _buildDesktopMenu()),
                   ),
-                  if (isDesktop) _buildDesktopMenu(),
-                  if (!isDesktop) _buildMobileMenu(),
-                  // Botão de ação
-                  if (isDesktop)
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFE91E63),
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 12),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        elevation: 0,
-                      ),
-                      icon: const Icon(Icons.message, size: 20),
-                      label: const Text('Agendar'),
-                      onPressed: () {
-                        // Exemplo: abrir WhatsApp
-                        // widget.onNavigate(widget.contatoKey);
-                      },
-                    ),
-                ],
-              ),
+
+                // Botões de ação
+                _buildActionButtons(isDesktop),
+              ],
             ),
           ),
         ),
@@ -130,16 +84,120 @@ class _AppBarWidgetState extends State<AppBarWidget> {
     );
   }
 
+  Widget _buildLogo(bool isDesktop) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Logo com animação
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          width: isDesktop ? 44 : 38,
+          height: isDesktop ? 44 : 38,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFFF6EFE7), // Bege claro
+                Color(0xFFB8A48B), // Marrom claro
+                Color(0xFF7C6A58), // Marrom médio
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            border: Border.all(
+              color: Colors.white,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF7C6A58).withOpacity(0.3),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+                spreadRadius: 0,
+              ),
+            ],
+          ),
+          child: ClipOval(
+            child: Image.asset(
+              'assets/images/logo.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+
+        SizedBox(width: isDesktop ? 14 : 10),
+
+        // Título responsivo
+        if (isDesktop || MediaQuery.of(context).size.width > 400)
+          Flexible(
+            child: AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 300),
+              style: TextStyle(
+                fontSize: isDesktop ? 26 : 20,
+                fontWeight: FontWeight.bold,
+                color: _isScrolled ? const Color(0xFF7C6A58) : Colors.white,
+                letterSpacing: isDesktop ? 1.2 : 0.8,
+                shadows: !_isScrolled
+                    ? [
+                        Shadow(
+                          color: Colors.black.withOpacity(0.5),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ]
+                    : null,
+              ),
+              child: const Text('Turmalina Estética'),
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildActionButtons(bool isDesktop) {
+    if (isDesktop) {
+      // Adicione aqui o(s) botão(ões) de ação para desktop, se necessário.
+      return const SizedBox.shrink();
+    } else {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment:
+            CrossAxisAlignment.center, // Centraliza verticalmente
+        children: [
+          const SizedBox(width: 8),
+          _buildMobileMenu(),
+        ],
+      );
+    }
+  }
+
   Widget _buildDesktopMenu() {
     final menuItems = [
-      {'title': 'Serviços', 'key': widget.servicosKey},
-      {'title': 'Conteúdo', 'key': widget.conteudoKey},
-      {'title': 'Resultados', 'key': widget.resultadosKey},
-      {'title': 'Comentários', 'key': widget.comentariosKey},
-      {'title': 'Contato', 'key': widget.contatoKey},
+      {'title': 'Serviços', 'key': widget.servicosKey, 'icon': Icons.spa},
+      {
+        'title': 'Conteúdo',
+        'key': widget.conteudoKey,
+        'icon': Icons.video_library
+      },
+      {
+        'title': 'Resultados',
+        'key': widget.resultadosKey,
+        'icon': Icons.photo_library
+      },
+      {
+        'title': 'Comentários',
+        'key': widget.comentariosKey,
+        'icon': Icons.rate_review
+      },
+      {
+        'title': 'Contato',
+        'key': widget.contatoKey,
+        'icon': Icons.contact_mail
+      },
     ];
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: menuItems.map((item) {
         return _HoverNavItem(
           title: item['title'] as String,
@@ -152,37 +210,101 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   }
 
   Widget _buildMobileMenu() {
-    return PopupMenuButton<String>(
-      icon: Icon(
-        Icons.menu,
-        color: _isScrolled ? const Color(0xFFE91E63) : Colors.white,
+    return Container(
+      height: 44, // Altura igual ao botão Agendar
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color(0xFFF6EFE7), // Bege claro
+            Color(0xFFB8A48B), // Marrom claro
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(25),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF7C6A58).withOpacity(0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
-      onSelected: (value) {
-        switch (value) {
-          case 'servicos':
-            widget.onNavigate(widget.servicosKey);
-            break;
-          case 'conteudo':
-            widget.onNavigate(widget.conteudoKey);
-            break;
-          case 'resultados':
-            widget.onNavigate(widget.resultadosKey);
-            break;
-          case 'comentarios':
-            widget.onNavigate(widget.comentariosKey);
-            break;
-          case 'contato':
-            widget.onNavigate(widget.contatoKey);
-            break;
-        }
-      },
-      itemBuilder: (context) => [
-        const PopupMenuItem(value: 'servicos', child: Text('Serviços')),
-        const PopupMenuItem(value: 'conteudo', child: Text('Conteúdo')),
-        const PopupMenuItem(value: 'resultados', child: Text('Resultados')),
-        const PopupMenuItem(value: 'comentarios', child: Text('Comentários')),
-        const PopupMenuItem(value: 'contato', child: Text('Contato')),
-      ],
+      child: PopupMenuButton<String>(
+        icon: Icon(
+          Icons.menu_rounded,
+          color: Colors.white,
+          size: 22,
+        ),
+        color: Colors.white,
+        elevation: 20,
+        shadowColor: Colors.black.withOpacity(0.2),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        offset: const Offset(0, 60),
+        onSelected: (value) {
+          switch (value) {
+            case 'servicos':
+              widget.onNavigate(widget.servicosKey);
+              break;
+            case 'conteudo':
+              widget.onNavigate(widget.conteudoKey);
+              break;
+            case 'resultados':
+              widget.onNavigate(widget.resultadosKey);
+              break;
+            case 'comentarios':
+              widget.onNavigate(widget.comentariosKey);
+              break;
+            case 'contato':
+              widget.onNavigate(widget.contatoKey);
+              break;
+          }
+        },
+        itemBuilder: (context) => [
+          _buildPopupMenuItem('servicos', 'Serviços', Icons.spa),
+          _buildPopupMenuItem('conteudo', 'Conteúdo', Icons.video_library),
+          _buildPopupMenuItem('resultados', 'Resultados', Icons.photo_library),
+          _buildPopupMenuItem('comentarios', 'Comentários', Icons.rate_review),
+          _buildPopupMenuItem('contato', 'Contato', Icons.contact_mail),
+        ],
+      ),
+    );
+  }
+
+  PopupMenuItem<String> _buildPopupMenuItem(
+      String value, String title, IconData icon) {
+    return PopupMenuItem(
+      value: value,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF7C6A58).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                icon,
+                color: const Color(0xFF7C6A58),
+                size: 20,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -215,18 +337,40 @@ class _HoverNavItemState extends State<_HoverNavItem> {
       onExit: (_) => setState(() => _isHovering = false),
       child: GestureDetector(
         onTap: () => widget.onNavigate(widget.keySection),
-        child: AnimatedDefaultTextStyle(
+        child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          decoration: BoxDecoration(
             color: _isHovering
-                ? const Color(0xFFE91E63)
-                : (widget.isScrolled ? Colors.black87 : Colors.white),
-            letterSpacing: 1.1,
+                ? const Color(0xFF7C6A58).withOpacity(0.1)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(25),
+            border: _isHovering
+                ? Border.all(
+                    color: const Color(0xFF7C6A58).withOpacity(0.3),
+                    width: 1,
+                  )
+                : null,
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 4),
+          child: AnimatedDefaultTextStyle(
+            duration: const Duration(milliseconds: 200),
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: _isHovering
+                  ? const Color(0xFF7C6A58)
+                  : (widget.isScrolled ? Colors.black87 : Colors.white),
+              letterSpacing: 0.8,
+              shadows: !widget.isScrolled && !_isHovering
+                  ? [
+                      Shadow(
+                        color: Colors.black.withOpacity(0.5),
+                        blurRadius: 4,
+                        offset: const Offset(0, 1),
+                      ),
+                    ]
+                  : null,
+            ),
             child: Text(widget.title),
           ),
         ),

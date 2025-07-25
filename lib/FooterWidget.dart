@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FooterWidget extends StatelessWidget {
@@ -36,12 +37,26 @@ class FooterWidget extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                '© 2024 Turmalina Estética. Todos os direitos reservados.',
+                '© 2025 Turmalina Estética. Todos os direitos reservados.',
                 style: TextStyle(
                   color: Colors.grey[400],
                   fontSize: isDesktop ? 14 : 12,
                 ),
                 textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              GestureDetector(
+                onTap: () => _launchUrl(
+                    'https://ruantorress.github.io/bio-Ruan/'), // coloque o link desejado aqui
+                child: Text(
+                  'Desenvolvido por Ruan Torres',
+                  style: TextStyle(
+                    color: Color(0xFF7C6A58),
+                    fontSize: isDesktop ? 13 : 11,
+                    decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ],
           ),
@@ -111,16 +126,16 @@ class FooterWidget extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: const Color(0xFFE91E63).withOpacity(0.1),
+            color: const Color(0xFF7C6A58).withOpacity(0.1),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: const Color(0xFFE91E63).withOpacity(0.3),
+              color: const Color(0xFF7C6A58).withOpacity(0.3),
             ),
           ),
           child: const Text(
             'PROFISSIONAL QUALIFICADA',
             style: TextStyle(
-              color: Color(0xFFE91E63),
+              color: Color(0xFF7C6A58),
               fontSize: 12,
               fontWeight: FontWeight.w600,
               letterSpacing: 1.2,
@@ -153,7 +168,7 @@ class FooterWidget extends StatelessWidget {
                     width: 4,
                     height: 20,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE91E63),
+                      color: const Color(0xFF7C6A58),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -175,7 +190,7 @@ class FooterWidget extends StatelessWidget {
                     width: 4,
                     height: 20,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE91E63),
+                      color: const Color(0xFF7C6A58),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -197,7 +212,7 @@ class FooterWidget extends StatelessWidget {
                     width: 4,
                     height: 20,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE91E63),
+                      color: const Color(0xFF7C6A58),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -236,18 +251,19 @@ class FooterWidget extends StatelessWidget {
         // Botão de contato
         Container(
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+            gradient: LinearGradient(
               colors: [
-                Color(0xFFE91E63),
-                Color(0xFFAD1457),
+                Color(0xFFF6EFE7), // Bege claro
+                Color.fromARGB(255, 136, 127, 116), // Marrom claro
+                // Marrom médio
               ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFFE91E63).withOpacity(0.3),
+                color: const Color(0xFF7C6A58).withOpacity(0.3),
                 blurRadius: 15,
                 offset: const Offset(0, 5),
               ),
@@ -304,12 +320,13 @@ class FooterWidget extends StatelessWidget {
               height: 400,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
+                  colors: [
+                    Color(0xFFF6EFE7), // Bege claro
+                    Color.fromARGB(255, 136, 127, 116), // Marrom claro
+                    // Marrom médio
+                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [
-                    const Color(0xFFE91E63).withOpacity(0.2),
-                    const Color(0xFFAD1457).withOpacity(0.1),
-                  ],
                 ),
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -348,12 +365,14 @@ class FooterWidget extends StatelessWidget {
                           height: 400,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
+                              colors: [
+                                Color(0xFFF6EFE7), // Bege claro
+                                Color.fromARGB(
+                                    255, 136, 127, 116), // Marrom claro
+                                // Marrom médio
+                              ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
-                              colors: [
-                                const Color(0xFFE91E63).withOpacity(0.8),
-                                const Color(0xFFAD1457),
-                              ],
                             ),
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -396,7 +415,7 @@ class FooterWidget extends StatelessWidget {
                             height: 8,
                             decoration: BoxDecoration(
                               color: currentPage == index
-                                  ? const Color(0xFFE91E63)
+                                  ? const Color(0xFF7C6A58)
                                   : Colors.white.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(4),
                             ),
@@ -418,11 +437,11 @@ class FooterWidget extends StatelessWidget {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: const Color(0xFFE91E63),
+                color: const Color(0xFF7C6A58),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFFE91E63).withOpacity(0.3),
+                    color: const Color(0xFF7C6A58).withOpacity(0.3),
                     blurRadius: 15,
                     offset: const Offset(0, 5),
                   ),
@@ -445,11 +464,7 @@ class FooterWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(flex: 2, child: _buildCompanyInfo()),
-        const SizedBox(width: 60),
-        Expanded(child: _buildQuickLinks()),
-        const SizedBox(width: 60),
-        Expanded(child: _buildContactInfo()),
-        const SizedBox(width: 60),
+        const SizedBox(width: 30),
         Expanded(child: _buildSocialMedia()),
       ],
     );
@@ -459,14 +474,6 @@ class FooterWidget extends StatelessWidget {
     return Column(
       children: [
         _buildCompanyInfo(),
-        const SizedBox(height: 30),
-        Row(
-          children: [
-            Expanded(child: _buildQuickLinks()),
-            const SizedBox(width: 20),
-            Expanded(child: _buildContactInfo()),
-          ],
-        ),
         const SizedBox(height: 30),
         _buildSocialMedia(),
       ],
@@ -478,7 +485,7 @@ class FooterWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Turmalina Estética',
+          'Clinica Turmalina Estética',
           style: TextStyle(
             color: Colors.white,
             fontSize: 24,
@@ -500,51 +507,6 @@ class FooterWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildQuickLinks() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Links Rápidos',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 16),
-        _buildFooterLink('Início'),
-        _buildFooterLink('Serviços'),
-        _buildFooterLink('Resultados'),
-        _buildFooterLink('Comentários'),
-        _buildFooterLink('Contato'),
-      ],
-    );
-  }
-
-  Widget _buildContactInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Contato',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 16),
-        _buildContactItem(
-            Icons.location_on, 'Rua das Flores, 123\nCentro - Cidade/Estado'),
-        const SizedBox(height: 12),
-        _buildContactItem(Icons.phone, '(11) 99999-9999'),
-        const SizedBox(height: 12),
-        _buildContactItem(Icons.email, 'contato@turmalinaestetica.com'),
-      ],
-    );
-  }
-
   Widget _buildSocialMedia() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -561,12 +523,12 @@ class FooterWidget extends StatelessWidget {
         Row(
           children: [
             _buildSocialButton(
-              Icons.camera_alt,
+              FontAwesomeIcons.instagram,
               () => _launchUrl('https://instagram.com/turmalina.estetica23'),
             ),
             const SizedBox(width: 12),
             _buildSocialButton(
-              Icons.phone,
+              FontAwesomeIcons.whatsapp,
               () => _launchUrl('https://wa.me/5511999999999'),
             ),
           ],
@@ -583,48 +545,6 @@ class FooterWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildFooterLink(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: GestureDetector(
-        onTap: () {
-          // Implementar navegação
-        },
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Colors.grey[300],
-            fontSize: 14,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildContactItem(IconData icon, String text) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Icon(
-          icon,
-          color: const Color(0xFFE91E63),
-          size: 16,
-        ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Colors.grey[300],
-              fontSize: 14,
-              height: 1.3,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildSocialButton(IconData icon, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
@@ -632,7 +552,7 @@ class FooterWidget extends StatelessWidget {
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          color: const Color(0xFFE91E63),
+          color: Color(0xFF7C6A58),
           shape: BoxShape.circle,
         ),
         child: Icon(

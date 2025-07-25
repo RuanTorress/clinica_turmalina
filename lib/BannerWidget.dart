@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BannerWidget extends StatefulWidget {
   const BannerWidget({super.key});
@@ -9,6 +11,15 @@ class BannerWidget extends StatefulWidget {
 }
 
 class _BannerWidgetState extends State<BannerWidget> {
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Não foi possível abrir o link: $url';
+    }
+  }
+
   final List<String> _images = [
     'assets/images/20241203_165058768_iOS.jpg',
     'assets/images/20241203_165118090_iOS.jpg',
@@ -74,13 +85,13 @@ class _BannerWidgetState extends State<BannerWidget> {
       height: size.height,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
+          colors: [
+            Color(0xFFF6EFE7), // Bege claro
+            Color(0xFFB8A48B), // Marrom claro
+            Color(0xFF7C6A58), // Marrom médio
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFE91E63),
-            Color(0xFFAD1457),
-            Color(0xFF880E4F),
-          ],
         ),
       ),
       child: Stack(
@@ -158,12 +169,11 @@ class _BannerWidgetState extends State<BannerWidget> {
                       ),
                       const SizedBox(height: 40),
                       ElevatedButton(
-                        onPressed: () {
-                          // Scroll to contact section
-                        },
+                        onPressed: () =>
+                            _launchUrl('https://wa.me/5562984332822'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
-                          foregroundColor: const Color(0xFFE91E63),
+                          foregroundColor: const Color(0xFF7C6A58),
                           padding: EdgeInsets.symmetric(
                             horizontal: size.width > 768 ? 40 : 30,
                             vertical: size.width > 768 ? 20 : 15,
