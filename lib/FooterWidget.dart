@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FooterWidget extends StatelessWidget {
-  const FooterWidget({super.key});
+  FooterWidget({super.key});
+
+  final List<String> doctorImages = [
+    'assets/images/20241203_165154822_iOS.jpg',
+    'assets/images/20241203_165557641_iOS.jpg',
+    'assets/images/20241203_165058768_iOS.jpg',
+    // Adicione mais imagens conforme necessário
+  ];
+
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -307,7 +316,7 @@ class FooterWidget extends StatelessWidget {
             ),
           ),
 
-          // Imagem principal
+          // Carrossel de imagens
           Positioned(
             top: 0,
             left: 0,
@@ -326,34 +335,77 @@ class FooterWidget extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  'assets/images/20241203_165154822_iOS.jpg', // coloque o nome correto do arquivo aqui
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: 300,
-                      height: 400,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            const Color(0xFFE91E63).withOpacity(0.8),
-                            const Color(0xFFAD1457),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.person,
-                          size: 80,
-                          color: Colors.white,
-                        ),
-                      ),
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: doctorImages.length,
+                  itemBuilder: (context, index) {
+                    return Image.asset(
+                      doctorImages[index],
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          width: 300,
+                          height: 400,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                const Color(0xFFE91E63).withOpacity(0.8),
+                                const Color(0xFFAD1457),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.person,
+                              size: 80,
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                      },
                     );
                   },
                 ),
+              ),
+            ),
+          ),
+
+          // Indicadores do carrossel
+          Positioned(
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: StatefulBuilder(
+                builder: (context, setState) {
+                  return FutureBuilder(
+                    future: Future.value(_pageController.hasClients
+                        ? _pageController.page?.round() ?? 0
+                        : 0),
+                    builder: (context, snapshot) {
+                      int currentPage = snapshot.data ?? 0;
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(doctorImages.length, (index) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
+                            width: currentPage == index ? 16 : 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color: currentPage == index
+                                  ? const Color(0xFFE91E63)
+                                  : Colors.white.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          );
+                        }),
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ),
