@@ -40,7 +40,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
       {
         'url':
             'https://www.instagram.com/turmalina.estetica23/reel/DLXutWtuV7k/',
-        'title': 'PEIM ( Procedimento injetavel em microvasos)',
+        'title': 'PEIM ( Procedimento Estético injetável em microvasos)',
         'description':
             'Conheça nosso tratamento especializado para PEIM (microvasos), que utiliza técnicas avançadas para eliminar pequenos vasos indesejados, promovendo uma pele mais uniforme, saudável e bonita.',
         'duration': '2:45',

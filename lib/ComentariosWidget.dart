@@ -179,9 +179,9 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
                   ),
 
                 Text(
-                  'O que nossos clientes dizem',
+                  'O que nossos pacientes dizem',
                   style: TextStyle(
-                    fontSize: isDesktop ? 42 : 28,
+                    fontSize: isDesktop ? 42 : 22,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                     height: 1.2,
@@ -190,7 +190,7 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Depoimentos reais de clientes satisfeitos com nossos tratamentos',
+                  'Depoimentos reais de pacientes satisfeitos com nossos tratamentos',
                   style: TextStyle(
                     fontSize: isDesktop ? 18 : 16,
                     color: Colors.grey[600],

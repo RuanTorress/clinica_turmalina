@@ -46,7 +46,7 @@ class _ResultadosWidgetState extends State<ResultadosWidget> {
         'imagens': [
           'assets/images/WhatsApp Image 2025-07-24 at 16.47.23.jpeg',
         ],
-        'titulo': 'Crecimento para barba',
+        'titulo': 'Terapia para crescimento para Barba',
       },
       {
         'imagens': [
@@ -77,7 +77,7 @@ class _ResultadosWidgetState extends State<ResultadosWidget> {
           ),
           const SizedBox(height: 16),
           Text(
-            'Veja as transformações incríveis de nossos clientes',
+            'Confira as transformações incríveis dos nossos pacientes!',
             style: TextStyle(
               fontSize: isDesktop ? 18 : 16,
               color: Colors.grey[600],

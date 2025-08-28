@@ -90,9 +90,9 @@ class _ContatoWidgetState extends State<ContatoWidget> {
           child: Column(
             children: [
               Text(
-                'Entre em Contato Conosco',
+                'Entre em contato conosco',
                 style: TextStyle(
-                  fontSize: isDesktop ? 42 : 32,
+                  fontSize: isDesktop ? 32 : 22,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),

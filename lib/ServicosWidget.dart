@@ -36,39 +36,28 @@ class _ServicosWidgetState extends State<ServicosWidget>
         'services': [
           {
             'name': 'Limpeza de Pele Premium',
-            'description': 'Tratamento profundo de limpeza e renovação',
+            'description': 'Renovação profunda e pele revitalizada',
           },
           {
             'name': 'Rejuvenescimento Facial',
-            'description': 'Procedimentos anti-idade avançados',
+            'description': 'Tecnologias avançadas contra o envelhecimento ',
           },
           {
             'name': 'Fios de PDO',
-            'description': 'Lifting facial não cirúrgico com fios absorvíveis',
+            'description': 'Bioestimulador de colágeno sólido absorvível',
           },
           {
             'name': 'Tratamento para flacidez',
-            'description': 'Firmeza e sustentação da pele com radiofrequência',
+            'description': 'Pele mais firme e com melhor sustentação',
           },
           {
             'name': 'Melasma',
             'description': 'Clareamento de manchas e controle do melasma',
           },
-// ...existing code...
           {
-            'name': 'Tratamento para olheiras',
-            'description':
-                'Redução de olheiras e revitalização do contorno dos olhos',
-          },
-          {
-            'name': 'Terapia Capilar para Barba',
+            'name': 'Terapia para Barba',
             'description':
                 'Tratamentos especializados para crescimento e saúde da barba',
-          },
-// ...existing code...
-          {
-            'name': 'Lipo de papada enzimática',
-            'description': 'Redução não invasiva da gordura submentoniana',
           },
           {
             'name': 'Peeling Químico',
@@ -82,7 +71,6 @@ class _ServicosWidgetState extends State<ServicosWidget>
             'name': 'Aplicação de Botox',
             'description': 'Redução de rugas e linhas de expressão',
           },
-
           {
             'name': 'Microagulhamento',
             'description': 'Estimulação do colágeno natural',
@@ -102,10 +90,6 @@ class _ServicosWidgetState extends State<ServicosWidget>
           {
             'name': 'Lipo de papada enzimática',
             'description': 'Redução não invasiva de gordura',
-          },
-          {
-            'name': 'Toxina botulinica (Botox)',
-            'description': 'Redução de rugas e linhas de expressão',
           },
         ],
       },
@@ -136,11 +120,6 @@ class _ServicosWidgetState extends State<ServicosWidget>
           {
             'name': 'Terapia Capilar',
             'description': 'Tratamentos para couro cabeludo e cabelos',
-          },
-          {
-            'name': 'Terapia Capilar para Barba',
-            'description':
-                'Tratamentos especializados para crescimento e saúde da barba',
           },
           {
             'name': 'Pós-operatório',

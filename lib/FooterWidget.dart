@@ -186,7 +186,7 @@ class _FooterWidgetState extends State<FooterWidget> {
         const Text(
           'Dra. Thaynara Torres',
           style: TextStyle(
-            fontSize: 36,
+            fontSize: 26,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
             height: 1.1,
@@ -200,11 +200,11 @@ class _FooterWidgetState extends State<FooterWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _buildQualificationItem('Graduada em Estética e Cosmética'),
+              const SizedBox(height: 8),
               _buildQualificationItem('Graduanda em Biomédicina'),
               const SizedBox(height: 8),
-              _buildQualificationItem('Pós graduada em Estética avançada'),
-              const SizedBox(height: 8),
-              _buildQualificationItem('Graduada em Estética e Cosmética'),
+              _buildQualificationItem('Pós-Graduada em Estética Avançada'),
             ],
           ),
         ),

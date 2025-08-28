@@ -184,7 +184,7 @@ class _BannerWidgetState extends State<BannerWidget> {
                           elevation: 8,
                         ),
                         child: Text(
-                          'Agende sua Consulta',
+                          'Agende a sua consulta',
                           style: TextStyle(
                             fontSize: size.width > 768 ? 18 : 16,
                             fontWeight: FontWeight.w600,
