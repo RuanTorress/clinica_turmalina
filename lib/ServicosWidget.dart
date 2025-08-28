@@ -39,8 +39,36 @@ class _ServicosWidgetState extends State<ServicosWidget>
             'description': 'Tratamento profundo de limpeza e renovação',
           },
           {
-            'name': 'Rejuvenescimento',
+            'name': 'Rejuvenescimento Facial',
             'description': 'Procedimentos anti-idade avançados',
+          },
+          {
+            'name': 'Fios de PDO',
+            'description': 'Lifting facial não cirúrgico com fios absorvíveis',
+          },
+          {
+            'name': 'Tratamento para flacidez',
+            'description': 'Firmeza e sustentação da pele com radiofrequência',
+          },
+          {
+            'name': 'Melasma',
+            'description': 'Clareamento de manchas e controle do melasma',
+          },
+// ...existing code...
+          {
+            'name': 'Tratamento para olheiras',
+            'description':
+                'Redução de olheiras e revitalização do contorno dos olhos',
+          },
+          {
+            'name': 'Terapia Capilar para Barba',
+            'description':
+                'Tratamentos especializados para crescimento e saúde da barba',
+          },
+// ...existing code...
+          {
+            'name': 'Lipo de papada enzimática',
+            'description': 'Redução não invasiva da gordura submentoniana',
           },
           {
             'name': 'Peeling Químico',
@@ -54,10 +82,7 @@ class _ServicosWidgetState extends State<ServicosWidget>
             'name': 'Aplicação de Botox',
             'description': 'Redução de rugas e linhas de expressão',
           },
-          {
-            'name': 'Melasma',
-            'description': 'Tratamento para manchas e hiperpigmentação',
-          },
+
           {
             'name': 'Microagulhamento',
             'description': 'Estimulação do colágeno natural',
@@ -78,6 +103,10 @@ class _ServicosWidgetState extends State<ServicosWidget>
             'name': 'Lipo de papada enzimática',
             'description': 'Redução não invasiva de gordura',
           },
+          {
+            'name': 'Toxina botulinica (Botox)',
+            'description': 'Redução de rugas e linhas de expressão',
+          },
         ],
       },
       'corporal': {
@@ -85,47 +114,23 @@ class _ServicosWidgetState extends State<ServicosWidget>
         'icon': Icons.fitness_center_outlined,
         'services': [
           {
-            'name': 'Corrente Russa',
-            'description': 'Fortalecimento muscular com eletroestimulação',
-          },
-          {
-            'name': 'Endermologia',
-            'description': 'Massagem mecânica para celulite',
-          },
-          {
-            'name': 'Ventosaterapia',
-            'description': 'Terapia com ventosas para drenagem',
-          },
-          {
-            'name': 'Massagem Modeladora',
-            'description': 'Modelagem corporal manual',
-          },
-          {
-            'name': 'Massagem Relaxante',
-            'description': 'Relaxamento e bem-estar',
-          },
-          {
-            'name': 'Drenagem Linfática',
-            'description': 'Redução de inchaço e retenção',
-          },
-          {
-            'name': 'Enzimas Corporais',
-            'description': 'Tratamento enzimático para gordura',
-          },
-          {
-            'name': 'Tratamentos para Gordura Localizada',
-            'description': 'Redução de medidas direcionada',
-          },
-          {
-            'name': 'Tratamentos para Estrias, Flacidez e Celulite',
-            'description': 'Melhora da textura e firmeza da pele',
-          },
-          {
             'name': 'PEIM (Aplicação em Microvasos)',
             'description': 'Tratamento para vasinhos e microvasos',
           },
           {
-            'name': 'Método Empina Bumbum',
+            'name': 'Tratamento para gordura localizada',
+            'description': 'Redução de medidas com técnicas avançadas',
+          },
+          {
+            'name': 'Protocolo de Emagrecimento',
+            'description': 'Programa completo para perda de peso',
+          },
+          {
+            'name': 'Aplicação de enzimas',
+            'description': 'Tratamento enzimático para gordura localizada',
+          },
+          {
+            'name': 'Metodo Empina Bumbum',
             'description': 'Modelagem e lifting dos glúteos',
           },
           {
@@ -133,8 +138,22 @@ class _ServicosWidgetState extends State<ServicosWidget>
             'description': 'Tratamentos para couro cabeludo e cabelos',
           },
           {
-            'name': 'Pós-Operatório',
+            'name': 'Terapia Capilar para Barba',
+            'description':
+                'Tratamentos especializados para crescimento e saúde da barba',
+          },
+          {
+            'name': 'Pós-operatório',
             'description': 'Recuperação e cicatrização pós-cirúrgica',
+          },
+          {
+            'name': 'Massagem relaxante',
+            'description': 'Alívio do estresse e tensão muscular',
+          },
+          {
+            'name': 'Drenagem linfática',
+            'description':
+                'Estimulação do sistema linfático para redução de inchaço',
           },
         ],
       },
@@ -178,7 +197,7 @@ class _ServicosWidgetState extends State<ServicosWidget>
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -235,7 +254,7 @@ class _ServicosWidgetState extends State<ServicosWidget>
   }
 
   Widget _buildTabBarView(Map<String, dynamic> servicosData, bool isDesktop) {
-    return Container(
+    return SizedBox(
       height: isDesktop ? 600 : 500,
       child: TabBarView(
         controller: _tabController,
@@ -277,13 +296,13 @@ class _ServicosWidgetState extends State<ServicosWidget>
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
         ],
         border: Border.all(
-          color: Colors.grey.withOpacity(0.1),
+          color: Colors.grey.withValues(alpha: 0.1),
           width: 1,
         ),
       ),

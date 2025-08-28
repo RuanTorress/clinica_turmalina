@@ -5,6 +5,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 // Imports condicionais para web
+// ignore: deprecated_member_use
 import 'dart:html' as html;
 import 'dart:ui_web' as ui_web;
 
@@ -16,12 +17,10 @@ class ContatoWidget extends StatefulWidget {
 }
 
 class _ContatoWidgetState extends State<ContatoWidget> {
-  final _formKey = GlobalKey<FormState>();
   final _nomeController = TextEditingController();
   final _emailController = TextEditingController();
   final _telefoneController = TextEditingController();
   final _mensagemController = TextEditingController();
-  bool _isLoading = false;
   final List<bool> _expandedStates = List.generate(7, (index) => false);
 
   // ViewType único para o mapa
@@ -151,7 +150,7 @@ class _ContatoWidgetState extends State<ContatoWidget> {
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
+                  color: Colors.black.withValues(alpha: (0.08 * 255)),
                   blurRadius: 25,
                   offset: const Offset(0, 8),
                 ),
@@ -189,7 +188,7 @@ class _ContatoWidgetState extends State<ContatoWidget> {
                   'Telefone',
                   '(62) 98433-2822',
                   isDesktop: isDesktop,
-                  onTap: () => _launchUrl('tel:+5562984332822'),
+                  onTap: () => _launchUrl('https://wa.me/5562984332822'),
                 ),
                 const SizedBox(height: 20),
                 _buildContactItem(
@@ -231,7 +230,7 @@ class _ContatoWidgetState extends State<ContatoWidget> {
               width: isDesktop ? 50 : 45,
               height: isDesktop ? 50 : 45,
               decoration: BoxDecoration(
-                color: const Color(0xFF7C6A58).withOpacity(0.1),
+                color: const Color(0xFF7C6A58).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
@@ -319,7 +318,7 @@ class _ContatoWidgetState extends State<ContatoWidget> {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF7C6A58).withOpacity(0.3),
+              color: const Color(0xFF7C6A58).withValues(alpha: 0.3),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -361,7 +360,7 @@ class _ContatoWidgetState extends State<ContatoWidget> {
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
+                  color: Colors.black.withValues(alpha: 0.08),
                   blurRadius: 25,
                   offset: const Offset(0, 8),
                 ),
@@ -690,40 +689,6 @@ class _ContatoWidgetState extends State<ContatoWidget> {
       html.window.open(url, '_blank');
     } else {
       _launchUrl(url);
-    }
-  }
-
-  void _submitForm() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        _isLoading = true;
-      });
-
-      // Simular envio
-      await Future.delayed(const Duration(seconds: 2));
-
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Mensagem enviada com sucesso!'),
-            backgroundColor: const Color(0xFF7C6A58),
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-        );
-
-        // Limpar formulário
-        _nomeController.clear();
-        _emailController.clear();
-        _telefoneController.clear();
-        _mensagemController.clear();
-      }
     }
   }
 

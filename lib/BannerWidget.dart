@@ -150,7 +150,7 @@ class _BannerWidgetState extends State<BannerWidget> {
                               key: ValueKey(index),
                               style: TextStyle(
                                 fontSize: size.width > 768 ? 24 : 18,
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.white.withValues(alpha: 0.9),
                                 height: 1.5,
                               ),
                               textAlign: TextAlign.center,
@@ -163,7 +163,7 @@ class _BannerWidgetState extends State<BannerWidget> {
                         'Cuidados profissionais para realçar sua beleza natural',
                         style: TextStyle(
                           fontSize: size.width > 768 ? 18 : 16,
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withValues(alpha: 0.8),
                         ),
                         textAlign: TextAlign.center,
                       ),

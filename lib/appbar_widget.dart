@@ -60,23 +60,28 @@ class _AppBarWidgetState extends State<AppBarWidget> {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Logo e Título - Responsivo
-                Flexible(
-                  flex: isDesktop ? 1 : 2,
-                  child: _buildLogo(isDesktop),
-                ),
-
-                // Menu Desktop ou Mobile
-                if (isDesktop)
-                  Expanded(
-                    flex: 2,
-                    child: Center(child: _buildDesktopMenu()),
-                  ),
-
-                // Botões de ação
-                _buildActionButtons(isDesktop),
-              ],
+              children: _isScrolled
+                  ? [
+                      // Apenas logo e menu quando rolado
+                      Flexible(
+                        flex: isDesktop ? 1 : 2,
+                        child: _buildLogo(isDesktop),
+                      ),
+                      _buildActionButtons(isDesktop),
+                    ]
+                  : [
+                      // Layout completo quando não rolado
+                      Flexible(
+                        flex: isDesktop ? 1 : 2,
+                        child: _buildLogo(isDesktop),
+                      ),
+                      if (isDesktop)
+                        Expanded(
+                          flex: 2,
+                          child: Center(child: _buildDesktopMenu()),
+                        ),
+                      _buildActionButtons(isDesktop),
+                    ],
             ),
           ),
         ),
@@ -97,9 +102,8 @@ class _AppBarWidgetState extends State<AppBarWidget> {
             shape: BoxShape.circle,
             gradient: LinearGradient(
               colors: [
-                Color(0xFFF6EFE7), // Bege claro
-                Color(0xFFB8A48B), // Marrom claro
-                Color(0xFF7C6A58), // Marrom médio
+                Color(0xFFF6EFE7),
+                Color(0xFFB8A48B),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -110,10 +114,10 @@ class _AppBarWidgetState extends State<AppBarWidget> {
             ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF7C6A58).withOpacity(0.3),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-                spreadRadius: 0,
+                color:
+                    const Color.fromARGB(255, 155, 141, 126).withOpacity(0.1),
+                blurRadius: 4,
+                offset: const Offset(0, 3),
               ),
             ],
           ),
@@ -210,65 +214,87 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   }
 
   Widget _buildMobileMenu() {
-    return Container(
-      height: 44, // Altura igual ao botão Agendar
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color(0xFFF6EFE7), // Bege claro
-            Color(0xFFB8A48B), // Marrom claro
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(25),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF7C6A58).withOpacity(0.3),
-            blurRadius: 8,
-            offset: const Offset(0, 3),
+    return Material(
+      color: Colors.transparent,
+      shape: const CircleBorder(),
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap:
+            () {}, // Necessário para efeito splash, pode ser removido se não quiser
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFFF6EFE7),
+                Color(0xFFB8A48B),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            border: Border.all(
+              color: Colors.white,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color:
+                    const Color.fromARGB(255, 155, 141, 126).withOpacity(0.1),
+                blurRadius: 4,
+                offset: const Offset(0, 3),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: PopupMenuButton<String>(
-        icon: Icon(
-          Icons.menu_rounded,
-          color: Colors.white,
-          size: 22,
+          child: Center(
+            child: PopupMenuButton<String>(
+              padding: EdgeInsets.zero, // Remove o padding extra
+              icon: Icon(
+                Icons.menu_rounded,
+                color: Color.fromARGB(255, 161, 151, 141),
+                size: 28,
+              ),
+              iconSize: 28,
+              color: Colors.white,
+              elevation: 10,
+              shadowColor: Colors.black.withOpacity(0.2),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              offset: const Offset(0, 60),
+              onSelected: (value) {
+                switch (value) {
+                  case 'servicos':
+                    widget.onNavigate(widget.servicosKey);
+                    break;
+                  case 'conteudo':
+                    widget.onNavigate(widget.conteudoKey);
+                    break;
+                  case 'resultados':
+                    widget.onNavigate(widget.resultadosKey);
+                    break;
+                  case 'comentarios':
+                    widget.onNavigate(widget.comentariosKey);
+                    break;
+                  case 'contato':
+                    widget.onNavigate(widget.contatoKey);
+                    break;
+                }
+              },
+              itemBuilder: (context) => [
+                _buildPopupMenuItem('servicos', 'Serviços', Icons.spa),
+                _buildPopupMenuItem(
+                    'conteudo', 'Conteúdo', Icons.video_library),
+                _buildPopupMenuItem(
+                    'resultados', 'Resultados', Icons.photo_library),
+                _buildPopupMenuItem(
+                    'comentarios', 'Comentários', Icons.rate_review),
+                _buildPopupMenuItem('contato', 'Contato', Icons.contact_mail),
+              ],
+            ),
+          ),
         ),
-        color: Colors.white,
-        elevation: 20,
-        shadowColor: Colors.black.withOpacity(0.2),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        offset: const Offset(0, 60),
-        onSelected: (value) {
-          switch (value) {
-            case 'servicos':
-              widget.onNavigate(widget.servicosKey);
-              break;
-            case 'conteudo':
-              widget.onNavigate(widget.conteudoKey);
-              break;
-            case 'resultados':
-              widget.onNavigate(widget.resultadosKey);
-              break;
-            case 'comentarios':
-              widget.onNavigate(widget.comentariosKey);
-              break;
-            case 'contato':
-              widget.onNavigate(widget.contatoKey);
-              break;
-          }
-        },
-        itemBuilder: (context) => [
-          _buildPopupMenuItem('servicos', 'Serviços', Icons.spa),
-          _buildPopupMenuItem('conteudo', 'Conteúdo', Icons.video_library),
-          _buildPopupMenuItem('resultados', 'Resultados', Icons.photo_library),
-          _buildPopupMenuItem('comentarios', 'Comentários', Icons.rate_review),
-          _buildPopupMenuItem('contato', 'Contato', Icons.contact_mail),
-        ],
       ),
     );
   }

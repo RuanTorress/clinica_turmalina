@@ -30,7 +30,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
       {
         'url':
             'https://www.instagram.com/reel/DI1TBWOO9mf/?igsh=MTRrZWZzNDI0b2kyNA==',
-        'title': 'Vídeo de botox',
+        'title': 'Botox',
         'description':
             'O botox é um procedimento minimamente invasivo que utiliza toxina botulínica para suavizar linhas de expressão e rugas. A aplicação é rápida e praticamente indolor, promovendo relaxamento dos músculos faciais e proporcionando um aspecto mais jovem e natural à pele. Indicado para tratar áreas como testa, glabela e ao redor',
         'duration': '2:45',
@@ -40,9 +40,9 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
       {
         'url':
             'https://www.instagram.com/turmalina.estetica23/reel/DLXutWtuV7k/',
-        'title': 'Vídeo de Microvasos',
+        'title': 'PEIM ( Procedimento injetavel em microvasos)',
         'description':
-            'Conheça nosso tratamento especializado para microvasos, que utiliza técnicas avançadas para eliminar pequenos vasos indesejados, promovendo uma pele mais uniforme, saudável e bonita.',
+            'Conheça nosso tratamento especializado para PEIM (microvasos), que utiliza técnicas avançadas para eliminar pequenos vasos indesejados, promovendo uma pele mais uniforme, saudável e bonita.',
         'duration': '2:45',
         'views': '1.2K',
         'img': 'assets/images/microvazos.jpg'
@@ -50,7 +50,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
       {
         'url':
             'https://www.instagram.com/reel/DKPlBwfuCd2/?igsh=OW51dDZ3aHdsY2dr',
-        'title': 'Vídeo de cicatrizes de acne',
+        'title': 'Cicatrizes de Acne',
         'description':
             'Tratamento especializado para cicatrizes de acne, utilizando técnicas avançadas como microagulhamento, peelings químicos e laser. Promove renovação celular, estimula o colágeno e melhora a textura da pele, reduzindo marcas e proporcionando uma aparência mais uniforme e saudável',
         'duration': '2:45',
@@ -164,7 +164,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
     return Column(
       children: [
         SizedBox(
-          height: 520,
+          height: 400,
           child: PageView.builder(
             controller: _pageController,
             onPageChanged: (index) {
@@ -176,7 +176,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
             itemBuilder: (context, index) {
               return AnimationConfiguration.staggeredList(
                 position: index,
-                duration: const Duration(milliseconds: 400),
+                duration: const Duration(milliseconds: 600),
                 child: SlideAnimation(
                   horizontalOffset: 50.0,
                   child: FadeInAnimation(
@@ -247,10 +247,10 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: const Color(0xFF7C6A58).withOpacity(0.1),
+              color: const Color(0xFF7C6A58).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: const Color(0xFF7C6A58).withOpacity(0.3),
+                color: const Color(0xFF7C6A58).withValues(alpha: 0.3),
                 width: 1,
               ),
             ),
@@ -292,7 +292,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF7C6A58).withOpacity(0.3),
+            color: const Color(0xFF7C6A58).withValues(alpha: 0.3),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -326,7 +326,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
+              color: Colors.black.withValues(alpha: 0.08),
               blurRadius: 15,
               offset: const Offset(0, 8),
               spreadRadius: 0,
@@ -365,7 +365,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
                               end: Alignment.bottomCenter,
                               colors: [
                                 Colors.transparent,
-                                Colors.black.withOpacity(0.1),
+                                Colors.black.withValues(alpha: 0.1),
                               ],
                             ),
                           ),
@@ -377,7 +377,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
                         child: Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.7),
+                            color: Colors.black.withValues(alpha: 0.7),
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(
@@ -396,7 +396,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 6),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.8),
+                            color: Colors.black.withValues(alpha: 0.8),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
@@ -507,7 +507,8 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
                         borderRadius: BorderRadius.circular(25),
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFF7C6A58).withOpacity(0.3),
+                            color:
+                                const Color(0xFF7C6A58).withValues(alpha: 0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 4),
                           ),
@@ -552,7 +553,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
+              color: Colors.black.withValues(alpha: 0.08),
               blurRadius: 20,
               offset: const Offset(0, 4),
             ),
@@ -592,7 +593,7 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.7),
+                            color: Colors.black.withValues(alpha: 0.7),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
@@ -614,7 +615,8 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF7C6A58).withOpacity(0.9),
+                            color:
+                                const Color(0xFF7C6A58).withValues(alpha: 0.9),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
@@ -686,7 +688,8 @@ class _ConteudoWidgetState extends State<ConteudoWidget> {
                         Container(
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF7C6A58).withOpacity(0.1),
+                            color:
+                                const Color(0xFF7C6A58).withValues(alpha: 0.1),
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(

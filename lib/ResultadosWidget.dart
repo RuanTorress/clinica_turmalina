@@ -40,13 +40,13 @@ class _ResultadosWidgetState extends State<ResultadosWidget> {
         'imagens': [
           'assets/images/melasma.jpeg',
         ],
-        'titulo': 'Tratamento Melasma',
+        'titulo': 'Tratamento de Melasma',
       },
       {
         'imagens': [
           'assets/images/WhatsApp Image 2025-07-24 at 16.47.23.jpeg',
         ],
-        'titulo': 'Tratamento de Minosedio',
+        'titulo': 'Crecimento para barba',
       },
       {
         'imagens': [
@@ -139,26 +139,24 @@ class _ResultadosWidgetState extends State<ResultadosWidget> {
 
   Widget _buildMobileCarousel(List<Map<String, dynamic>> resultados) {
     return Container(
-      height: 500,
-      margin: const EdgeInsets.symmetric(horizontal: 5),
+      height: 400,
+      // Removido margin horizontal para expandir a imagem
+      width: double.infinity,
       child: PageView.builder(
         itemCount: resultados.length,
         padEnds: false,
         pageSnapping: true,
         controller: PageController(
-          viewportFraction: 0.85,
+          viewportFraction: 1, // Ocupa toda a largura
         ),
         itemBuilder: (context, index) {
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 8),
-            child: AnimationConfiguration.staggeredList(
-              position: index,
-              duration: const Duration(milliseconds: 600),
-              child: SlideAnimation(
-                horizontalOffset: 50.0,
-                child: FadeInAnimation(
-                  child: _buildResultadoCard(resultados[index], index, false),
-                ),
+          return AnimationConfiguration.staggeredList(
+            position: index,
+            duration: const Duration(milliseconds: 600),
+            child: SlideAnimation(
+              horizontalOffset: 50.0,
+              child: FadeInAnimation(
+                child: _buildResultadoCard(resultados[index], index, false),
               ),
             ),
           );

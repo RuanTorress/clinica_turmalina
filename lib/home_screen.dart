@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverToBoxAdapter(
             child: ContatoWidget(key: _contatoKey),
           ),
-          SliverToBoxAdapter(child: FooterWidget()),
+          const SliverToBoxAdapter(child: FooterWidget()),
         ],
       ),
     );

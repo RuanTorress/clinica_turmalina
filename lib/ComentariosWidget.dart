@@ -155,7 +155,7 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
                       borderRadius: BorderRadius.circular(25),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF7C6A58).withOpacity(0.3),
+                          color: const Color(0xFF7C6A58).withValues(alpha: 0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),
@@ -287,7 +287,8 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
                     boxShadow: _currentIndex == index
                         ? [
                             BoxShadow(
-                              color: const Color(0xFF7C6A58).withOpacity(0.3),
+                              color: const Color(0xFF7C6A58)
+                                  .withValues(alpha: 0.3),
                               blurRadius: 4,
                               offset: const Offset(0, 2),
                             ),
@@ -313,10 +314,10 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF7C6A58).withOpacity(0.1),
+                  color: const Color(0xFF7C6A58).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(25),
                   border: Border.all(
-                    color: const Color(0xFF7C6A58).withOpacity(0.3),
+                    color: const Color(0xFF7C6A58).withValues(alpha: 0.3),
                     width: 1,
                   ),
                 ),
@@ -358,7 +359,7 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF7C6A58).withOpacity(0.3),
+            color: const Color(0xFF7C6A58).withValues(alpha: 0.3),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -391,7 +392,7 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isActive ? 0.15 : 0.08),
+            color: Colors.black.withValues(alpha: isActive ? 0.15 : 0.08),
             blurRadius: isActive ? 30 : 20,
             offset: const Offset(0, 8),
             spreadRadius: isActive ? 2 : 0,
@@ -399,7 +400,7 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
         ],
         border: isActive
             ? Border.all(
-                color: const Color(0xFF7C6A58).withOpacity(0.2),
+                color: const Color(0xFF7C6A58).withValues(alpha: 0.2),
                 width: 2,
               )
             : null,
@@ -418,7 +419,7 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
                     gradient: LinearGradient(
                       colors: [
                         comentario['cor'] as Color,
-                        (comentario['cor'] as Color).withOpacity(0.7),
+                        (comentario['cor'] as Color).withValues(alpha: 0.7),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -426,7 +427,8 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: (comentario['cor'] as Color).withOpacity(0.3),
+                        color:
+                            (comentario['cor'] as Color).withValues(alpha: 0.3),
                         blurRadius: 12,
                         offset: const Offset(0, 6),
                       ),
@@ -465,10 +467,11 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: (comentario['cor'] as Color).withOpacity(0.1),
+                    color: (comentario['cor'] as Color).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(
-                      color: (comentario['cor'] as Color).withOpacity(0.3),
+                      color:
+                          (comentario['cor'] as Color).withValues(alpha: 0.3),
                       width: 1,
                     ),
                   ),
@@ -521,7 +524,7 @@ class _ComentariosWidgetState extends State<ComentariosWidget> {
                     children: [
                       Icon(
                         Icons.format_quote,
-                        color: const Color(0xFF7C6A58).withOpacity(0.6),
+                        color: const Color(0xFF7C6A58).withValues(alpha: 0.6),
                         size: 28,
                       ),
                       const SizedBox(height: 8),

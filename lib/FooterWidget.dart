@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FooterWidget extends StatefulWidget {
-  FooterWidget({super.key});
+  const FooterWidget({super.key});
 
   @override
   State<FooterWidget> createState() => _FooterWidgetState();
@@ -89,7 +89,7 @@ class _FooterWidgetState extends State<FooterWidget> {
                 child: Text(
                   'Desenvolvido por Ruan Torres',
                   style: TextStyle(
-                    color: Color(0xFF7C6A58),
+                    color: const Color(0xFF7C6A58),
                     fontSize: isDesktop ? 13 : 11,
                     decoration: TextDecoration.underline,
                     fontWeight: FontWeight.w500,
@@ -164,10 +164,10 @@ class _FooterWidgetState extends State<FooterWidget> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: const Color(0xFF7C6A58).withOpacity(0.1),
+            color: const Color(0xFF7C6A58).withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: const Color(0xFF7C6A58).withOpacity(0.3),
+              color: const Color(0xFF7C6A58).withValues(alpha: 0.3),
             ),
           ),
           child: const Text(
@@ -184,7 +184,7 @@ class _FooterWidgetState extends State<FooterWidget> {
 
         // Nome e título
         const Text(
-          'Dra. Thaynara',
+          'Dra. Thaynara Torres',
           style: TextStyle(
             fontSize: 36,
             fontWeight: FontWeight.bold,
@@ -200,11 +200,11 @@ class _FooterWidgetState extends State<FooterWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildQualificationItem('Graduada em Biomédica'),
+              _buildQualificationItem('Graduanda em Biomédicina'),
               const SizedBox(height: 8),
-              _buildQualificationItem('Pós graduada em estetica avançada'),
+              _buildQualificationItem('Pós graduada em Estética avançada'),
               const SizedBox(height: 8),
-              _buildQualificationItem('Graduada em Esteticista'),
+              _buildQualificationItem('Graduada em Estética e Cosmética'),
             ],
           ),
         ),
@@ -270,7 +270,7 @@ class _FooterWidgetState extends State<FooterWidget> {
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF7C6A58).withOpacity(0.3),
+            color: const Color(0xFF7C6A58).withValues(alpha: 0.3),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -313,7 +313,7 @@ class _FooterWidgetState extends State<FooterWidget> {
 
   // Imagem para Desktop - POSICIONAMENTO DAS SETAS CORRIGIDO
   Widget _buildDesktopDoctorImage() {
-    return Container(
+    return SizedBox(
       height: 500,
       width: 400, // Largura fixa para melhor controle
       child: Stack(
@@ -350,7 +350,7 @@ class _FooterWidgetState extends State<FooterWidget> {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withValues(alpha: 0.2),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -425,7 +425,7 @@ class _FooterWidgetState extends State<FooterWidget> {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withValues(alpha: 0.3),
                       blurRadius: 12,
                       offset: const Offset(0, 6),
                     ),
@@ -464,7 +464,7 @@ class _FooterWidgetState extends State<FooterWidget> {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withValues(alpha: 0.3),
                       blurRadius: 12,
                       offset: const Offset(0, 6),
                     ),
@@ -508,17 +508,17 @@ class _FooterWidgetState extends State<FooterWidget> {
                       decoration: BoxDecoration(
                         color: _currentPage == index
                             ? const Color(0xFF7C6A58)
-                            : Colors.white.withOpacity(0.7),
+                            : Colors.white.withValues(alpha: 0.7),
                         borderRadius: BorderRadius.circular(5),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
+                            color: Colors.black.withValues(alpha: 0.3),
                             blurRadius: 6,
                             offset: const Offset(0, 3),
                           ),
                         ],
                         border: Border.all(
-                          color: const Color(0xFF7C6A58).withOpacity(0.5),
+                          color: const Color(0xFF7C6A58).withValues(alpha: 0.5),
                           width: 1,
                         ),
                       ),
@@ -541,7 +541,7 @@ class _FooterWidgetState extends State<FooterWidget> {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF7C6A58).withOpacity(0.4),
+                    color: const Color(0xFF7C6A58).withValues(alpha: 0.4),
                     blurRadius: 15,
                     offset: const Offset(0, 5),
                   ),
@@ -565,7 +565,7 @@ class _FooterWidgetState extends State<FooterWidget> {
 
   // Imagem para Mobile - mantendo como estava
   Widget _buildMobileDoctorImage() {
-    return Container(
+    return SizedBox(
       height: 400,
       child: Stack(
         children: [
@@ -601,7 +601,7 @@ class _FooterWidgetState extends State<FooterWidget> {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -666,7 +666,7 @@ class _FooterWidgetState extends State<FooterWidget> {
                     decoration: BoxDecoration(
                       color: _currentPage == index
                           ? const Color(0xFF7C6A58)
-                          : Colors.white.withOpacity(0.5),
+                          : Colors.white.withValues(alpha: 0.5),
                       borderRadius: BorderRadius.circular(4),
                     ),
                   );
@@ -687,7 +687,7 @@ class _FooterWidgetState extends State<FooterWidget> {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF7C6A58).withOpacity(0.3),
+                    color: const Color(0xFF7C6A58).withValues(alpha: 0.3),
                     blurRadius: 15,
                     offset: const Offset(0, 5),
                   ),
@@ -731,7 +731,7 @@ class _FooterWidgetState extends State<FooterWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Clinica Turmalina Estética',
+          'Clínica Turmalina Estética',
           style: TextStyle(
             color: Colors.white,
             fontSize: 24,
@@ -776,6 +776,18 @@ class _FooterWidgetState extends State<FooterWidget> {
             _buildSocialButton(
               FontAwesomeIcons.whatsapp,
               () => _launchUrl('https://wa.me/5562984332822'),
+            ),
+            const SizedBox(width: 12),
+            _buildSocialButton(
+              FontAwesomeIcons.google,
+              () => _launchUrl(
+                  'https://www.google.com/search?sca_esv=465159d7bf2b0b64&sxsrf=AE3TifO4wkUMxTrKPV0Qp_rndUXw48zovg:1756402103919&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E-_Ifflm_8-uqLcVoDsiNVXv55bJE-HtgocPk2hoocUC-XM7ZsPCAA2kGjPQ2awHRAFblEEwuXWxV7fbuyEreWMu5RTtMaGSH_ARZCkfuZkpCXk1bvFZ6I5ZRyj9ucMnFk8lXvJY4vKw-kLDK178OD8OFUSSsxmwaJwLlyCH4cKzfhlPc3_4Y3MOZSs6YEn4jccNQoKivzl-a-jYetcWu3NHgzwsv2iAbWcQxaB9brmFiRcvQT38e7gw8tRAKQLzST14898%3D&q=Turmalina+Est%C3%A9tica+%7C+Botox,+Microvasos,+Cicatriz+de+acne,+Limpeza+de+Pele+-+Clinica+de+Est%C3%A9tica+Vila+Bras%C3%ADlia,+Ap+de+Goi%C3%A2nia+Coment%C3%A1rios&sa=X&ved=2ahUKEwjSo_Lbg66PAxV0r5UCHU60NT0Q0bkNegQINBAE&biw=1912&bih=954&dpr=1#'),
+            ),
+            const SizedBox(width: 12),
+            _buildSocialButton(
+              FontAwesomeIcons.facebook,
+              () => _launchUrl(
+                  'https://www.facebook.com/p/Turmalina-Est%C3%A9tica-100084998871027/'),
             ),
           ],
         ),
